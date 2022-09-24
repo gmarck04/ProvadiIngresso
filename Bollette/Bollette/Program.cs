@@ -1,7 +1,29 @@
-﻿using System;
+﻿/** 
+ * \file Program.cs
+ * \author @gmarck04
+ * \date 24/09/2022
+ * \brief Il programma è un comparatore di strumenti di riscaldamento
+ * Consegna:
+    La consegna dovrà contenere:    
+        - Relazione (requisiti, funzionale, tecnica) entro il 22/10/21
+        - Codice e revisione relazione entro il 4/11/21
+    Progettare un sistema di gestione del FANTACALCIO.
+    Il livello di complessità del regolamento dovrà essere gestito autonomamente e giustificato nella relazione.
+    Funzionalità minime
+        - Almeno 2 giocatori
+        - gestione dei crediti per l'acquisto giocatori (all'inizio X crediti, ogni giocatore vale y1, y2, y3..yn crediti
+        - gestione settimanale con inserimento punteggio singolo giocatori.
+        - gestione della classifica parziale al termine di ogni aggiornamento settimanale.
+    Il progetto DEVE essere svolto in modalità CONSOLE. */
+
+using System;
 
 namespace Bollette
 {
+    /**
+   * \class Program
+   * \brief Classe principale del programma, che ha il compito di interfacciarsi con l'utente
+   */
     class Program
     {
         static void Main(string[] args)
