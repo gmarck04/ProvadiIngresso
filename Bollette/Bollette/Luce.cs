@@ -6,9 +6,12 @@ namespace Bollette
 {
     class Luce : Energia
     {
-        public Luce(float MateriaUtilizzata) : base(MateriaUtilizzata)
+        public Luce(double MateriaUtilizzata, double CostoMateriaUtilizzata) : base(MateriaUtilizzata, CostoMateriaUtilizzata)
         {
         }
-
+        public double GetPotenzaLuceAGas()
+        {
+            return MateriaUtilizzata / 10.7;
+        }
     }
 }

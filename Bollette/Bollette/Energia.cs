@@ -6,28 +6,29 @@ namespace Bollette
 {
     class Energia
     {
-        protected float CostoTrasporto, OneriSistema, MateriaUtilizzata;
-        public Energia(float MateriaUtilizzata)
+        protected double CostoTrasporto = 96, OneriSistema = 47, MateriaUtilizzata, CostoMateriaUtilizzata;
+        public Energia(double MateriaUtilizzata, double CostoMateriaUtilizzata)
         {
             this.MateriaUtilizzata = MateriaUtilizzata;
+            this.CostoMateriaUtilizzata = CostoMateriaUtilizzata;
         }
 
-        protected virtual float TotaleNetto(float Costo)
+        protected virtual double TotaleNetto()
         {
-            return CostoMateriaPrima(Costo) + CostoTrasporto + OneriSistema;
+            return CostoMateriaPrima() + CostoTrasporto + OneriSistema;
         }
         
-        protected float CostoMateriaPrima(float Costo)
+        protected double CostoMateriaPrima()
         {
-            return MateriaUtilizzata * Costo;
+            return MateriaUtilizzata * CostoMateriaUtilizzata;
         }
 
-        public float TotaleLordo(float Costo)
+        public double TotaleLordo()
         {
-            return (float)Math.Round(((TotaleNetto(Costo) / 100) * 122), 2);
+            return Math.Round(((TotaleNetto() / 100) * 122), 2);
         }
 
-        protected virtual double GetPotenza()
+        public virtual double GetPotenzaNormale()
         {
             return MateriaUtilizzata;
         }

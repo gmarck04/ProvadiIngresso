@@ -6,16 +6,16 @@ namespace Bollette
 {
     class Gas : Energia
     {
-        float QVD;
-        public Gas(float MateriaUtilizzata) : base(MateriaUtilizzata)
+        int QVD = 70;
+        public Gas(double MateriaUtilizzata, double CostoMateriaUtilizzata) : base(MateriaUtilizzata, CostoMateriaUtilizzata)
         {
 
         }
-        protected override float TotaleNetto(float Costo)
+        protected override double TotaleNetto()
         {
-            return CostoMateriaPrima(Costo) + CostoTrasporto + OneriSistema + QVD;
+            return CostoMateriaPrima() + CostoTrasporto + OneriSistema + QVD;
         }
-        protected override double GetPotenza()
+        public double GetPotenzaGasALuce()
         {
             return MateriaUtilizzata * 10.7;
         }

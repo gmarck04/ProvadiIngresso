@@ -26,3 +26,17 @@ G:\Il mio Drive\Portatile\Github\ProvadiIngresso\Bollette\Bollette\bin\Debug\net
 G:\Il mio Drive\Portatile\Github\ProvadiIngresso\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.dll
 G:\Il mio Drive\Portatile\Github\ProvadiIngresso\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.pdb
 G:\Il mio Drive\Portatile\Github\ProvadiIngresso\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.genruntimeconfig.cache
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.exe
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.deps.json
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.runtimeconfig.json
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.runtimeconfig.dev.json
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.dll
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\bin\Debug\netcoreapp3.1\Bollette.pdb
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.csproj.AssemblyReference.cache
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.AssemblyInfoInputs.cache
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.AssemblyInfo.cs
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.csproj.CoreCompileInputs.cache
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.dll
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.pdb
+C:\Users\gmarc\OneDrive\Desktop\Bollette\Bollette\obj\Debug\netcoreapp3.1\Bollette.genruntimeconfig.cache
