@@ -4,28 +4,34 @@
  * \date 24/09/2022
  * \brief Il programma è un comparatore di strumenti di riscaldamento
  * Consegna:
-    La consegna dovrà contenere:    
-        - Relazione (requisiti, funzionale, tecnica) entro il 22/10/21
-        - Codice e revisione relazione entro il 4/11/21
-    Progettare un sistema di gestione del FANTACALCIO.
-    Il livello di complessità del regolamento dovrà essere gestito autonomamente e giustificato nella relazione.
-    Funzionalità minime
-        - Almeno 2 giocatori
-        - gestione dei crediti per l'acquisto giocatori (all'inizio X crediti, ogni giocatore vale y1, y2, y3..yn crediti
-        - gestione settimanale con inserimento punteggio singolo giocatori.
-        - gestione della classifica parziale al termine di ogni aggiornamento settimanale.
-    Il progetto DEVE essere svolto in modalità CONSOLE. */
+    Escludendo il calcolo delle accise, in base ai consumi annui (variabili) di una determinata utenza, trovare gli attuali prezzi di mercato con lo scopo di paragonare 
+    quando possa essere conveniente installare nuove pompe di calore, quando possa essere farlo mantenendo le attuali pompe di calore, quando sia conveniente utilizzare 
+    il vecchio sistema di riscaldamento e quando, nel caso possa esserlo, sia conveniente utilizzare stufe elettriche.
+
+    Dovranno essere consegnate:
+        - Analisi dei requisiti;
+        - Analisi delle funzionalità del prodotto software e dell'interazione con l'utente;
+        - Analisi tecnica con indicazione delle classi e dei metodi;
+        - Realizzazione, con codice accuratamente commentato, di tutto il codice possibile o delle parti salienti (in base al tempo)
+        - Rendicontazione dei tempi (ore di lavoro e studio per ogni attività)
+        - Autovalutazione e analisi dei punti critici */
 
 using System;
 
 namespace Bollette
 {
     /**
-   * \class Program
-   * \brief Classe principale del programma, che ha il compito di interfacciarsi con l'utente
-   */
+     * \class Program
+     * \brief La classe Programm è la classe principale del programma, che ha il compito di interfacciarsi con l'utente
+     */
     class Program
     {
+
+        /**
+         * \fn      static void Main(string[] args)
+         * \brief   Eseguo il codice richiamando una serie di funzioni
+         * \details La funzione Main chiama la funzione menù() e la funzione Console.ReadKey()
+         */
         static void Main(string[] args)
         {
             menù();
@@ -33,15 +39,18 @@ namespace Bollette
         }
 
         /**
-         * \fn      public static void menù()
-         * \param   scelta: serve per inserire la scelta fatta dall'utente, viene posta pari a -1
-         * \brief   Va ad indirizzare la scelta fatta con la funzione menu_scelta.
-         * \details Viene utilizzata all'inzio un Console.Clear(), poi inizia un ciclo do while, che si ripete fino a quando scelta non è uguale a 5, poi viene inserito in scelta il valore di ritorno della funzione menu_scelta(),
-         * poi viene fatto uno switch case con la variablie scelta, se scelta è uguale a 1 allora si richiama la funzione Inserisci_fantacalciatore(), se scelta è uguale a 2 allora si richiama la funzione Menù_aggiungi_punti(),
-         * se scelta è uguale a 3 allora si richiama la funzione Banca_vendita(), a cui passo il valore di ritorno della funzione Id_Fantaallenatori(), a cui a sua volta passo il valore di ritorno della funzione Squadra() 
-         * e se scelta è uguale a 4 allora si richiama la funzione Classifica_Punti()
-        */
-
+         * \fn      public static double MateriaUtilizzata()
+         * \param   scelta: variabile inserita dall'utente
+         * \param   controllo: valore per il controllo, successivo al tentativo con una funzione TryParse
+         * \brief   Viene visualizzato un menù per scelgliere le azioni da compiere
+         * \details Viene visualizzata la stringa "Inserisci i consumi annuali della famiglia.", do alla variabile di tipo bool controllo il valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta.
+         * Inizia un ciclo while, se il controllo è falso o se la variabile scelta è minore di 0, allora inizia il ciclo e viene mostrata
+         * la stringa "Errato. Inserisci i consumi annuali della famiglia.", poi do alla variabile di tipo bool controllo il valore pari al valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta, se il ciclo finisce allora viene ritornata 
+         * la variabile scelta.
+         * \return  scelta: valore inserito dall'utente.
+         */
         public static double MateriaUtilizzata()
         {
             double scelta;
@@ -55,312 +64,54 @@ namespace Bollette
             return scelta;
         }
 
+        /**
+         * \fn      public static double RichiediCostoStrumento()
+         * \param   scelta: variabile inserita dall'utente
+         * \param   controllo: valore per il controllo, successivo al tentativo con una funzione TryParse
+         * \brief   Viene visualizzato un menù per scelgliere le azioni da compiere
+         * \details Viene visualizzata la stringa "Inserisci il costo dello strumento.", do alla variabile di tipo bool controllo il valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta.
+         * Inizia un ciclo while, se il controllo è falso o se la variabile scelta è minore di 0, allora inizia il ciclo e viene mostrata
+         * la stringa "Errato. Inserisci il costo dello strumento.", poi do alla variabile di tipo bool controllo il valore pari al valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta, se il ciclo finisce allora viene ritornata 
+         * la variabile scelta.
+         * \return  scelta: valore inserito dall'utente.
+         */
         public static double RichiediCostoStrumento()
         {
             double scelta;
             Console.WriteLine("Inserisci il costo dello strumento.");
-            bool controllo = double.TryParse(Console.ReadLine(), out scelta); //Inizializzo la variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
-            while (!controllo || (scelta < 0)) //Ciclo while, che si avvia se controllo è falso o se la variabile numero_squadre è minore di 0 o maggiore di 14.
-            {
-                Console.WriteLine("Errato. Inserisci il costo dello strumento."); //Scrive su console la stringa.
-                controllo = double.TryParse(Console.ReadLine(), out scelta); //Do alla variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
-            }
+            bool controllo = double.TryParse(Console.ReadLine(), out scelta);
+                Console.WriteLine("Errato. Inserisci il costo dello strumento."); 
+                controllo = double.TryParse(Console.ReadLine(), out scelta); 
             return scelta;
         }
 
+        /**
+         * \fn      public static double RichiediCostoMateria()
+         * \param   scelta: variabile inserita dall'utente
+         * \param   controllo: valore per il controllo, successivo al tentativo con una funzione TryParse
+         * \brief   Viene visualizzato un menù per scelgliere le azioni da compiere
+         * \details Viene visualizzata la stringa "Inserisci il costo della materia prima.", do alla variabile di tipo bool controllo il valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta.
+         * Inizia un ciclo while, se il controllo è falso o se la variabile scelta è minore di 0, allora inizia il ciclo e viene mostrata
+         * la stringa "Errato. Inserisci il costo della materia prima.", poi do alla variabile di tipo bool controllo il valore pari al valore ritornato dalla funzione TryParse,
+         * che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in double e lo inserisce in scelta, se il ciclo finisce allora viene ritornata 
+         * la variabile scelta.
+         * \return  scelta: valore inserito dall'utente.
+         */
         public static double RichiediCostoMateria()
         {
             double scelta;
             Console.WriteLine("Inserisci il costo della materia prima.");
-            bool controllo = double.TryParse(Console.ReadLine(), out scelta); //Inizializzo la variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
-            while (!controllo || (scelta < 0)) //Ciclo while, che si avvia se controllo è falso o se la variabile numero_squadre è minore di 0 o maggiore di 14.
+            bool controllo = double.TryParse(Console.ReadLine(), out scelta);
             {
-                Console.WriteLine("Errato. Inserisci il costo della materia prima."); //Scrive su console la stringa.
-                controllo = double.TryParse(Console.ReadLine(), out scelta); //Do alla variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
+                Console.WriteLine("Errato. Inserisci il costo della materia prima.");
+
+                controllo = double.TryParse(Console.ReadLine(), out scelta);
+
             }
             return scelta;
-        }
-
-        public static void menù()
-        {
-            int scelta1 = -1; //Inizzializzo la avriabile di tipo int scelta e la pongo uguale a -1.
-            Console.Clear(); //Funzione, che pulisce la console.
-
-            do //Ciclo do while, che continua se la variabile di tipo int è diversa da 6.
-            {
-                Console.WriteLine("Scegli il mezzo di partenza:");
-                scelta1 = menu_scelta();
-                switch (scelta1) //Switch con la variabile scelta.
-                {
-                    case 1: //Se la variabile scelta è uguale a 1.
-                        {
-                            Console.WriteLine("Inserisci per la luce");
-                            double CostoLuce = RichiediCostoMateria();
-                            Console.WriteLine("Inserisci per il gas");
-                            double CostoGas = RichiediCostoMateria();
-                            Luce energia = new Luce(MateriaUtilizzata(), CostoLuce);
-                            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (energia.GetPotenzaNormale()));
-                            Console.WriteLine("Scegli il mezzo da comparare:");
-                            int scelta2 = menu_scelta();
-                            while (scelta1 == scelta2)
-                            {
-                                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
-                                scelta2 = menu_scelta();
-                            }
-                            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaNormale());
-                                Luce energiastrumento2 = new Luce(strumento2.GetPotenzaEffettiva(), CostoLuce);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                            else if (scelta2 == 3 || scelta2 == 4)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaLuceAGas());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                        }
-                        break; //Chiudo.    
-                    case 2: //Se la variabile scelta è uguale a 2.
-                        {
-                            Console.WriteLine("Inserisci per la luce");
-                            double CostoLuce = RichiediCostoMateria();
-                            Console.WriteLine("Inserisci per il gas");
-                            double CostoGas = RichiediCostoMateria();
-                            Luce energia = new Luce(MateriaUtilizzata(), CostoLuce);
-                            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (energia.GetPotenzaNormale()));
-                            Console.WriteLine("Scegli il mezzo da comparare:");
-                            int scelta2 = menu_scelta();
-                            while (scelta1 == scelta2)
-                            {
-                                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
-                                scelta2 = menu_scelta();
-                            }
-                            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaNormale());
-                                Luce energiastrumento2 = new Luce(strumento2.GetPotenzaEffettiva(), CostoLuce);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                            else if (scelta2 == 3 || scelta2 == 4)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaLuceAGas());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                        }
-                        break; //Chiudo.    
-                    case 3: //Se la variabile scelta è uguale a 3.
-                        {
-                            Console.WriteLine("Inserisci per la luce");
-                            double CostoLuce = RichiediCostoMateria();
-                            Console.WriteLine("Inserisci per il gas");
-                            double CostoGas = RichiediCostoMateria();
-                            Gas gas = new Gas(MateriaUtilizzata(), CostoGas);
-                            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (gas.GetPotenzaGasALuce()));
-                            Console.WriteLine("Scegli il mezzo da comparare:");
-                            int scelta2 = menu_scelta();
-                            while (scelta1 == scelta2)
-                            {
-                                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
-                                scelta2 = menu_scelta();
-                            }
-                            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                            else if (scelta2 == 3 || scelta2 == 4)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                        }
-                        break; //Chiudo.    
-                    case 4: //Se la variabile scelta è uguale a 4.
-                        {
-                            Console.WriteLine("Inserisci per la luce");
-                            double CostoLuce = RichiediCostoMateria();
-                            Console.WriteLine("Inserisci per il gas");
-                            double CostoGas = RichiediCostoMateria();
-                            Gas gas = new Gas(MateriaUtilizzata(), CostoGas);
-                            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (gas.GetPotenzaGasALuce()));
-                            Console.WriteLine("Scegli il mezzo da comparare:");
-                            int scelta2 = menu_scelta();
-                            while (scelta1 == scelta2)
-                            {
-                                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
-                                scelta2 = menu_scelta();
-                            }
-                            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                            else if (scelta2 == 3 || scelta2 == 4)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                        }
-                        break; //Chiudo.    
-                    case 5: //Se la variabile scelta è uguale a 5.
-                        {
-                            Console.WriteLine("Inserisci per la luce");
-                            double CostoLuce = RichiediCostoMateria();
-                            Console.WriteLine("Inserisci per il gas");
-                            double CostoGas = RichiediCostoMateria();
-                            Luce energia = new Luce(MateriaUtilizzata(), CostoLuce);
-                            //Console.WriteLine("Inserisci per il gas"); +gas.GetPotenzaGasALuce()
-                            //Gas gas = new Gas(MateriaUtilizzata(), CostoGas);
-                            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (energia.GetPotenzaNormale()));
-                            Console.WriteLine("Scegli il mezzo da comparare:");
-                            int scelta2 = menu_scelta();
-                            while (scelta1 == scelta2)
-                            {
-                                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
-                                scelta2 = menu_scelta();
-                            }
-                            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaNormale());
-                                Luce energiastrumento2 = new Luce(strumento2.GetPotenzaEffettiva(), CostoLuce);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                            else if (scelta2 == 3 || scelta2 == 4)
-                            {
-                                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaLuceAGas());
-                                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
-                                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene il secondo strumento inserito");
-
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Coviene lo strumento di partenza");
-                                }
-                                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energia.TotaleLordo()))
-                                {
-                                    Console.WriteLine("Le due soluzioni sono uguali");
-                                }
-                            }
-                        }
-                        break; //Chiudo.
-                }
-            } while (scelta1 != 6);
         }
 
         /**
@@ -368,11 +119,12 @@ namespace Bollette
          * \param   scelta: variabile inserita dall'utente
          * \param   controllo: valore per il controllo, successivo al tentativo con una funzione TryParse
          * \brief   Viene visualizzato un menù per scelgliere le azioni da compiere
-         * \details Viene pulita la console, con un Console.Clear(), poi viene visualizzata la stringa "Menù:\n -1 Inserisci fanatcalciatori.\n -2 Inserisci punti.\n -3 Vendi fantacalciatore.\n -4 Mostra classifica.\n 
-         * -5 Chiudi programma.", do alla variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine,
-         * restituisce il valore convertito in int e lo inserisce in scelta, inizia un ciclo while se controllo è falso o se la variabile numero_squadre è minore di 0 o maggiore di 14, se inizia allora viene mostrata
-         * la stringa "Errato. Menù:\n -1 Inserisci fanatcalciatori.\n -2 Inserisci punti.\n -3 Vendi fantacalciatore.\n -4 Mostra classifica.\n -5 Chiudi programma.",
-         * poi do alla variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore 
+         * \details Viene visualizzata la stringa "-1 Pompa di calore.\n -2 Pompa di calore economica.\n -3 Caldaia tradizionale.\n -4 Caldaia a condensazione.\n -5 Stufa elettrica.\n -6 Chiudi programma.",
+         * do alla variabile di tipo bool controllo il valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine,
+         * restituisce il valore convertito in int e lo inserisce in scelta.
+         * Inizia un ciclo while, se il controllo è falso o se la variabile scelta è minore di 0 o maggiore di 7, allora inizia il ciclo e viene mostrata
+         * la stringa "Errato. -1 Pompa di calore.\n -2 Pompa di calore economica.\n -3 Caldaia tradizionale.\n -4 Caldaia a condensazione.\n -5 Stufa elettrica.\n -6 Chiudi programma.",
+         * poi do alla variabile di tipo bool controllo il valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore 
          * convertito in int e lo inserisce in scelta, se il ciclo finisce allora viene ritornata la variabile scelta
          * \return  scelta: valore inserito dall'utente.
          */
@@ -380,23 +132,168 @@ namespace Bollette
         {
             int scelta;
             Console.WriteLine(" -1 Pompa di calore.\n -2 Pompa di calore economica.\n -3 Caldaia tradizionale.\n -4 Caldaia a condensazione.\n -5 Stufa elettrica.\n -6 Chiudi programma.");
-            bool controllo = int.TryParse(Console.ReadLine(), out scelta); //Inizializzo la variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
-            while (!controllo || (scelta < 0 || scelta > 7)) //Ciclo while, che si avvia se controllo è falso o se la variabile numero_squadre è minore di 0 o maggiore di 14.
+            bool controllo = int.TryParse(Console.ReadLine(), out scelta);
+            while (!controllo || (scelta < 0 || scelta > 7))
             {
-                Console.WriteLine("Errato. -1 Pompa di calore.\n -2 Pompa di calore economica.\n -3 Caldaia tradizionale.\n -4 Caldaia a condensazione.\n -5 Stufa elettrica.\n -6 Chiudi programma."); //Scrive su console la stringa.
-                controllo = int.TryParse(Console.ReadLine(), out scelta); //Do alla variabile di tipo bool controllo e le do valore pari al valore ritornato dalla funzione TryParse, che prende in entrata il valore preso dalla funzione Console.ReadLine, restituisce il valore convertito in int e lo inserisce in scelta.
+                Console.WriteLine("Errato. -1 Pompa di calore.\n -2 Pompa di calore economica.\n -3 Caldaia tradizionale.\n -4 Caldaia a condensazione.\n -5 Stufa elettrica.\n -6 Chiudi programma.");
+                controllo = int.TryParse(Console.ReadLine(), out scelta);
             }
-            return scelta; //Ritorna la variabile scelta.
+            return scelta;
         }
 
-        double GetPotenza(int tipologia, float potenza)
-        {
-            if (tipologia == 0)
-                return potenza;
-            else if (tipologia == 1)
-                return potenza * 10.7;
 
-            return -1;
+        /**
+         * \fn      public static void sceltaElettrica(int scelta1)
+         * \param   scelta2: serve per inserire la scelta fatta dall'utente
+         * \param   CostoLuce: serve per inserire il costo della luce inserita dall'utente
+         * \param   CostoGas: serve per inserire il costo della gas inserita dall'utente
+         * \brief   Viene fatta una comparazione se lo strumento di partenza utilizza la luce.
+         * \details Viene richiesto all'utente di inserire i prezzi del gas e della luce, poi si crea l'oggetto energia di tipo Luce, viene poi richiesto di inserire il mezzo da comparare attraverso la funzione menu_scelta(),
+         * viene poi eseguito un controllo sulla non ugualietà dei valori di scelta1 e scelta2.
+         * Succesivamente viene fatto un if, se scelta1 è uguale a 1, 2 o 5 allora si crea l'oggetto strumento2 di tipo StrumentiRiscaldamento, l'oggetto energiastrumento2 di tipo Luce e vengono comparati i prezzi restituti dalle classi, 
+         * dicendo quale tra lo strumento di partenza e lo strumento comparato è più conveniente.
+         * Se scelta1 è uguale a 3 o 4 allora si crea l'oggetto strumento2 di tipo StrumentiRiscaldamento, l'oggetto energiastrumento2 di tipo Gas e vengono comparati i prezzi restituti dalle classi, dicendo quale tra lo strumento di partenza 
+         * e lo strumento comparato è più conveniente
+         */
+        public static void sceltaElettrica(int scelta1)
+        {
+            Console.WriteLine("Inserisci per la luce");
+            double CostoLuce = RichiediCostoMateria();
+            Console.WriteLine("Inserisci per il gas");
+            double CostoGas = RichiediCostoMateria();
+            Luce energia = new Luce(MateriaUtilizzata(), CostoLuce);
+            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (energia.GetPotenzaNormale()));
+            Console.WriteLine("Scegli il mezzo da comparare:");
+            int scelta2 = menu_scelta();
+            while (scelta1 == scelta2)
+            {
+                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
+                scelta2 = menu_scelta();
+            }
+            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
+            {
+                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaNormale());
+                Luce energiastrumento2 = new Luce(strumento2.GetPotenzaEffettiva(), CostoLuce);
+                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene il secondo strumento inserito");
+
+                }
+                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene lo strumento di partenza");
+                }
+                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Le due soluzioni sono uguali");
+                }
+            }
+            else if (scelta2 == 3 || scelta2 == 4)
+            {
+                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, energia.GetPotenzaLuceAGas());
+                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
+                if (pompadicalore.GetCosto(energia.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene il secondo strumento inserito");
+
+                }
+                else if (pompadicalore.GetCosto(energia.TotaleLordo()) < strumento2.GetCosto(energia.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene lo strumento di partenza");
+                }
+                else if (pompadicalore.GetCosto(energia.TotaleLordo()) == strumento2.GetCosto(energia.TotaleLordo()))
+                {
+                    Console.WriteLine("Le due soluzioni sono uguali");
+                }
+            }
+        }
+
+        /**
+        * \fn      public static void sceltaGas(int scelta1)
+        * \param   scelta2: serve per inserire la scelta fatta dall'utente
+        * \param   CostoLuce: serve per inserire il costo della luce inserita dall'utente
+        * \param   CostoGas: serve per inserire il costo della gas inserita dall'utente
+        * \brief   Viene fatta una comparazione se lo strumento di partenza utilizza la luce.
+        * \details Viene richiesto all'utente di inserire i prezzi del gas e della luce, poi si crea l'oggetto gas di tipo Gas, viene poi richiesto di inserire il mezzo da comparare attraverso la funzione menu_scelta(),
+        * viene poi eseguito un controllo sulla non ugualietà dei valori di scelta1 e scelta2.
+        * Succesivamente viene fatto un if, se scelta1 è uguale a 1, 2 o 5 allora si crea l'oggetto strumento2 di tipo StrumentiRiscaldamento, l'oggetto energiastrumento2 di tipo Luce e vengono comparati i prezzi restituti dalle classi, 
+        * dicendo quale tra lo strumento di partenza e lo strumento comparato è più conveniente.
+        * Se scelta1 è uguale a 3 o 4 allora si crea l'oggetto strumento2 di tipo StrumentiRiscaldamento, l'oggetto energiastrumento2 di tipo Gas e vengono comparati i prezzi restituti dalle classi, dicendo quale tra lo strumento di partenza 
+        * e lo strumento comparato è più conveniente
+        */
+        public static void sceltaGas(int scelta1)
+        {
+            Console.WriteLine("Inserisci per la luce");
+            double CostoLuce = RichiediCostoMateria();
+            Console.WriteLine("Inserisci per il gas");
+            double CostoGas = RichiediCostoMateria();
+            Gas gas = new Gas(MateriaUtilizzata(), CostoGas);
+            StrumentiRiscaldamento pompadicalore = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta1, (gas.GetPotenzaGasALuce()));
+            Console.WriteLine("Scegli il mezzo da comparare:");
+            int scelta2 = menu_scelta();
+            while (scelta1 == scelta2)
+            {
+                Console.WriteLine("Errore. Non puoi inserire lo stesso strumento");
+                scelta2 = menu_scelta();
+            }
+            if (scelta2 == 1 || scelta2 == 2 || scelta2 == 5)
+            {
+                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
+                Luce energiastrumento2 = new Luce(strumento2.GetPotenzaEffettiva(), CostoGas);
+                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene il secondo strumento inserito");
+
+                }
+                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene lo strumento di partenza");
+                }
+                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Le due soluzioni sono uguali");
+                }
+            }
+            else if (scelta2 == 3 || scelta2 == 4)
+            {
+                StrumentiRiscaldamento strumento2 = new StrumentiRiscaldamento(RichiediCostoStrumento(), scelta2, gas.GetPotenzaGasALuce());
+                Gas energiastrumento2 = new Gas(strumento2.GetPotenzaEffettiva(), CostoGas);
+                if (pompadicalore.GetCosto(gas.TotaleLordo()) > strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene il secondo strumento inserito");
+
+                }
+                else if (pompadicalore.GetCosto(gas.TotaleLordo()) < strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Coviene lo strumento di partenza");
+                }
+                else if (pompadicalore.GetCosto(gas.TotaleLordo()) == strumento2.GetCosto(energiastrumento2.TotaleLordo()))
+                {
+                    Console.WriteLine("Le due soluzioni sono uguali");
+                }
+            }
+        }
+
+        /**
+        * \fn      public static void menù()
+        * \param   scelta1: serve per inserire la scelta fatta dall'utente, viene posta pari a -1
+        * \brief   Va ad indirizzare la scelta fatta con la funzione menu_scelta.
+        * \details Viene utilizzata all'inzio un Console.Clear(), poi inizia un ciclo do while, che si ripete fino a quando scelta non è uguale a 6, poi viene inserito in scelta1 il valore di ritorno della funzione menu_scelta(),
+         * poi viene fatto un if, se scelta1 è uguale a 1, 2 o 5 allora si richiamerà la funzione sceltaElettrica(scelta1) oppure se scelta1 è uguale a 3 o 4 allora si richiamerà la funzione sceltaGas(scelta1).
+        */
+        public static void menù()
+        {
+            int scelta1 = -1;
+            Console.Clear();
+            do
+            {
+                Console.WriteLine("Scegli il mezzo di partenza:");
+                scelta1 = menu_scelta();
+                if (scelta1 == 1 || scelta1 == 2 || scelta1 == 5)
+                    sceltaElettrica(scelta1);
+                else if (scelta1 == 3 || scelta1 == 4)
+                    sceltaGas(scelta1);
+            } while (scelta1 != 6);
         }
     }
 }
